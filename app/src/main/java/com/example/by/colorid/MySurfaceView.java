@@ -15,8 +15,8 @@ import android.view.SurfaceView;
 import java.util.Random;
 
 /**
- * MySurfaceView
- *
+ * MySurfaceView不是在主ui里面画的，在自己的surface里面画
+ * 自己没有线程
  * @author: onlylemi
  * @time: 2016-01-22 10:17
  */
@@ -39,7 +39,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     private Vector loca; // 位置
     private Vector speed; // 速度
-    private Vector acc; // 加�?�度
+    private Vector acc; // 加�?�度
 
     private float rectX, rectY;
     private float rectWidth, rectHeight;
@@ -60,19 +60,18 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     /**
-     * 初始�?
+     * 初始�?
      */
     private void init() {
         holder = getHolder();
         holder.addCallback(this);
-
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.RED);
     }
 
     /**
-     * 初始化游�?
+     * 初始化游�?
      */
     private void initGame() {
         x = 0;
@@ -127,7 +126,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
      *
      * @param canvas
      */
-    private void myDraw(Canvas canvas) {
+        private void myDraw(Canvas canvas) {
         paint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, getWidth(), getHeight(), paint);
 
@@ -152,7 +151,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
      * 逻辑
      */
     private void logic() {
-        // �?单移�?
+        // �?单移�?
         x += speedX;
         y += speedY;
 
@@ -180,18 +179,18 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
         rect1X = x;
         rect1Y = y;
-        // 碰撞�?�?
-        // 矩形与矩�?
+        // 碰撞�?�?
+        // 矩形与矩�?
 //        isColl = rectAndRect(rect1X, rect1Y, rect1Width, rect1Height, rectX, rectY,
 //                rectWidth, rectHeight);
-        // 圆与�?
+        // 圆与�?
 //        isColl = circleAndCircle(x, y, radius, loca.x, loca.y, radius);
         //圆与矩形
         isColl = circleAndRect(loca.x, loca.y, radius, rectX, rectY, rectWidth, rectHeight);
     }
 
     /**
-     * 矩形与矩形之间的碰撞�?�?
+     * 矩形与矩形之间的碰撞�?�?
      *
      * @param rect1X
      * @param rect1Y
@@ -218,7 +217,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     /**
-     * 圆与圆碰撞检�?
+     * 圆与圆碰撞检�?
      *
      * @param circle1X
      * @param circle1Y
@@ -238,7 +237,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     /**
-     * 圆与矩形间的碰撞�?�?
+     * 圆与矩形间的碰撞�?�?
      *
      * @param circleX
      * @param circleY
@@ -303,8 +302,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void run() {
         while (flag) {
-            long start = System.currentTimeMillis(); //�?始时�?
-
+            long start = System.currentTimeMillis(); //�?始时�?
             canvas = holder.lockCanvas(); //加锁
             if (null != canvas) {
                 myDraw(canvas);

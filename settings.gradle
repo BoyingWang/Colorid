@@ -1,1 +1,1 @@
-include ':app', ':colorid2'
+include ':app', ':colorid2', ':flappybird'

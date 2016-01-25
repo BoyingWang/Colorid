@@ -2,7 +2,6 @@ package com.example.by.colorid;
 
 /**
  * Vector
- *
  * @author: onlylemi
  * @time: 2016-01-22 14:17
  */
@@ -10,7 +9,6 @@ public class Vector {
 
     public float x;
     public float y;
-
     public Vector() {
     }
 
@@ -122,7 +120,7 @@ public class Vector {
     }
 
     /**
-     * 单位�?
+     * 单位�?
      *
      * @return
      */

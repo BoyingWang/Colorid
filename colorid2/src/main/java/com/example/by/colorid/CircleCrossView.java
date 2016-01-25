@@ -34,7 +34,7 @@ public class CircleCrossView extends SurfaceView implements SurfaceHolder.Callba
         Log.i(TAG,"init");
         holder=getHolder();
         holder.addCallback(this);
-        holder.setFormat(PixelFormat.TRANSPARENT);
+        holder.setFormat(PixelFormat.TRANSPARENT);//设置显示格式，透明
         setKeepScreenOn(true);
         setZOrderOnTop(true);
         paint=new Paint();

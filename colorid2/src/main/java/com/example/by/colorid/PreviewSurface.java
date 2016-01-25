@@ -7,9 +7,11 @@ import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
+import android.location.GpsStatus;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.view.View;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,12 +21,14 @@ import java.io.IOException;
  * @author: by
  * @time: 2016/1/23.10:48
  */
-public class PrevoewSurface extends  CameraSurface implements Camera.PreviewCallback {
-    public PrevoewSurface(Context context) {
+public class PreviewSurface extends  CameraSurface implements Camera.PreviewCallback
+{
+    private OnColorListener listener;
+    public PreviewSurface(Context context) {
         super(context);
     }
 
-    public PrevoewSurface(Context context, AttributeSet attrs) {
+    public PreviewSurface(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
     @Override
@@ -64,5 +68,24 @@ public class PrevoewSurface extends  CameraSurface implements Camera.PreviewCall
                 .toByteArray()));
         int color=bitmap.getPixel(size.width/2,size.height/2);
         Log.i(TAG, "color:" + color);
+        if(null!=listener)
+        {
+            listener.onColor(color);
+        }
+    }
+
+    /**
+     * 颜色监听器
+     */
+    public interface OnColorListener{
+        void onColor(int color);//接口里默认是public
+    }
+
+    /**
+     * 设置监听器
+     * @param listener
+     */
+    public void setOnColorListener(OnColorListener listener) {
+        this.listener=listener;
     }
 }
